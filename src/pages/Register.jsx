@@ -24,10 +24,13 @@ export default function Register() {
   });
 
   useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-      navigate("/");
+    function handleNavigate() {
+      if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+        navigate("/");
+      }
     }
-  }, []);
+    handleNavigate();
+  }, [navigate]);
 
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });

@@ -27,7 +27,7 @@ export default function Chat() {
       }
     }
     fetchData();
-  }, []);
+  }, [navigate]);  
   
   useEffect(() => {
     if (currentUser) {
