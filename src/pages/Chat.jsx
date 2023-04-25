@@ -14,17 +14,21 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
-  useEffect(async () => {
-    if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-      navigate("/login");
-    } else {
-      setCurrentUser(
-        await JSON.parse(
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-        )
-      );
+  useEffect(() => {
+    async function fetchData() {
+      if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+        navigate("/login");
+      } else {
+        setCurrentUser(
+          await JSON.parse(
+            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+          )
+        );
+      }
     }
+    fetchData();
   }, []);
+  
   useEffect(() => {
     if (currentUser) {
       socket.current = io(host);
